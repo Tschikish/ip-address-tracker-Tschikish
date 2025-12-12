@@ -26,8 +26,6 @@ export default function Map({ center }: MapProps) {
       maxZoom: 19,
     }).addTo(map);
 
-    const markerOptions = L.markerOptions;
-
     L.marker(center, {
       icon: marker,
       keyboard: true,
