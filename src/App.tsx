@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import "leaflet/dist/leaflet.css";
 import Map from "./components/Map";
 import InfoCard, { type InfoCardProps } from "./components/InfoCard";
 import buttonArrow from "./assets/icon-arrow.svg";
 import { STATE_NAME_TO_CODE } from "./constants/RegionCodes.ts";
-import { RemainingCalls } from "./services/RemainingCalls";
 
 const API_KEY = "at_k24wjUCIpU1D36mSvgQa7wXYVxDYG";
 const placeHolder = "Search for any IP address or domain";
@@ -16,7 +15,6 @@ function App() {
   ]);
 
   //Nedovrseno
-  const [remainingRequests, SetRequests] = useState("");
   const [info, setInfo] = useState<InfoCardProps | null>(null);
 
   const formInput = async (e: React.FormEvent<HTMLButtonElement>) => {
@@ -46,7 +44,9 @@ function App() {
         city: result.location.city ?? "",
         postalCode: result.location.postalCode ?? "",
         regionCode:
-          STATE_NAME_TO_CODE[result.location.region] ?? result.location.region,
+          STATE_NAME_TO_CODE[
+            result.location.region as keyof typeof STATE_NAME_TO_CODE
+          ] ?? result.location.region,
         UfcOffset: result.location.timezone,
         ISP: result.isp,
       } as InfoCardProps);
@@ -69,15 +69,16 @@ function App() {
 
         {/* InfoCard handles null internally with placeholder */}
         {info ? (
-          <InfoCard
-            ip={info.ip}
-            city={info.city}
-            postalCode={info.postalCode}
-            regionCode={info.regionCode}
-            UfcOffset={info.UfcOffset}
-            ISP={info.ISP}
-          />
+          <InfoCard data={info} />
         ) : (
+          // <InfoCard
+          //   ip={info.ip}
+          //   city={info.city}
+          //   postalCode={info.postalCode}
+          //   regionCode={info.regionCode}
+          //   UfcOffset={info.UfcOffset}
+          //   ISP={info.ISP}
+          // />
           <InfoCard data={null} />
         )}
       </header>

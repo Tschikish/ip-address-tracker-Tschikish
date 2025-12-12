@@ -9,6 +9,10 @@ export interface InfoCardProps {
   ISP: string;
 }
 
+export interface InfoCardWrapperProps {
+  data: InfoCardProps | null;
+}
+
 const placeholder = {
   ip: "192.212.174.101",
   city: "Brooklyn",
@@ -18,14 +22,14 @@ const placeholder = {
   ISP: "SpaceX Starlink",
 };
 
-const InfoCard: React.FC<InfoCardProps> = (props) => {
+const InfoCard: React.FC<InfoCardWrapperProps> = (props) => {
   const [displayData, setDisplayData] = useState(placeholder);
 
   useEffect(() => {
-    if (props.ip && props.ip !== placeholder.ip) {
-      setDisplayData(props);
+    if (props.data !== null && props.data.ip !== placeholder.ip) {
+      setDisplayData(props.data);
     }
-  }, [props]);
+  }, [props.data]);
 
   return (
     <div className="info-card">
@@ -37,7 +41,8 @@ const InfoCard: React.FC<InfoCardProps> = (props) => {
       <div className="panel">
         <span id="title">LOCATION</span>
         <span id="info">
-          {displayData.city ? displayData.city + "," : ""}{displayData.regionCode} {displayData.postalCode}
+          {displayData.city ? displayData.city + "," : ""}
+          {displayData.regionCode} {displayData.postalCode}
         </span>
       </div>
 
