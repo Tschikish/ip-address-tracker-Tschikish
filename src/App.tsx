@@ -11,6 +11,7 @@ const form_placeholder = "Search for any IP address or domain";
 const first_location: [number, number] = [
   43.731542329234905, 7.415013322058932,
 ];
+const apiKey = import.meta.env.GEO_IPIFY_API_KEY;
 
 function App() {
   const [LatLng, SetLatLng] = useState<[number, number]>(first_location);
@@ -24,7 +25,7 @@ function App() {
     const input = document.getElementById("form-input") as HTMLInputElement;
     if (!input?.value) return;
 
-    const url = `https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.GEO_IPIFY_API_KEY}&ipAddress=${input.value}`;
+    const url = `https://geo.ipify.org/api/v2/country,city?apiKey=${apiKey}&ipAddress=${input.value}`;
 
     try {
       const response = await fetch(url);
