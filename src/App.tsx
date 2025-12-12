@@ -6,13 +6,14 @@ import InfoCard, { type InfoCardProps } from "./components/InfoCard";
 import buttonArrow from "./assets/icon-arrow.svg";
 import { STATE_NAME_TO_CODE } from "./constants/RegionCodes.ts";
 
-const API_KEY = "at_k24wjUCIpU1D36mSvgQa7wXYVxDYG";
-const placeHolder = "Search for any IP address or domain";
+//const API_KEY = "at_k24wjUCIpU1D36mSvgQa7wXYVxDYG";
+const form_placeholder = "Search for any IP address or domain";
+const first_location: [number, number] = [
+  43.731542329234905, 7.415013322058932,
+];
 
 function App() {
-  const [LatLng, SetLatLng] = useState<[number, number]>([
-    43.32058912134087, 21.920611628808345,
-  ]);
+  const [LatLng, SetLatLng] = useState<[number, number]>(first_location);
 
   //Nedovrseno
   const [info, setInfo] = useState<InfoCardProps | null>(null);
@@ -23,8 +24,7 @@ function App() {
     const input = document.getElementById("form-input") as HTMLInputElement;
     if (!input?.value) return;
 
-    const url = `https://geo.ipify.org/api/v2/country,city?apiKey=${API_KEY}&ipAddress=${input.value}`;
-    console.log(url);
+    const url = `https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.GEO_IPIFY_API_KEY}&ipAddress=${input.value}`;
 
     try {
       const response = await fetch(url);
@@ -35,9 +35,6 @@ function App() {
       const lat = result.location.lat;
       const lng = result.location.lng;
       SetLatLng([lat, lng]);
-
-      // Response is logged here
-      console.log(result);
 
       setInfo({
         ip: result.ip ?? "",
@@ -60,27 +57,14 @@ function App() {
       <header className="hero">
         <h1>IP Address Tracker</h1>
         <form>
-          <input type="text" placeholder={placeHolder} id="form-input" />
+          <input type="text" placeholder={form_placeholder} id="form-input" />
           <button onClick={formInput} className="test">
             <img src={buttonArrow} alt="search" />
           </button>
-          <h6>The number of remaining requests is: </h6>
+          <h6>Number of remaining requests: </h6>
         </form>
 
-        {/* InfoCard handles null internally with placeholder */}
-        {info ? (
-          <InfoCard data={info} />
-        ) : (
-          // <InfoCard
-          //   ip={info.ip}
-          //   city={info.city}
-          //   postalCode={info.postalCode}
-          //   regionCode={info.regionCode}
-          //   UfcOffset={info.UfcOffset}
-          //   ISP={info.ISP}
-          // />
-          <InfoCard data={null} />
-        )}
+        {info ? <InfoCard data={info} /> : <InfoCard data={null} />}
       </header>
 
       <Map center={LatLng} />

@@ -23,7 +23,7 @@ export default function Map({ center }: MapProps) {
     });
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 19,
+      maxZoom: 17,
     }).addTo(map);
 
     L.marker(center, {

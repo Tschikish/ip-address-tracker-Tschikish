@@ -1,7 +1,6 @@
 #root {
   text-align: center;
   height: 100%;
-
   display: flex;
   flex-direction: column;
 }
@@ -27,12 +26,13 @@ body {
 .hero h1 {
   padding: 2.25rem 0;
   margin: 0;
+
   font-weight: 500;
 }
 
 .hero form {
   position: relative;
-
+  min-width: 300px;
   height: 3.75rem;
   display: flex;
   justify-content: center;
@@ -42,7 +42,8 @@ body {
 
 .hero form h6 {
   position: absolute;
-  top: 3.4rem;
+
+  top: 3.1rem;
 }
 
 /* #endregion */
@@ -94,74 +95,6 @@ body {
 
 /* #region Info Card */
 
-.info-card {
-  display: flex;
-  position: absolute;
-  z-index: 100;
-
-  height: 10rem;
-  width: 77%;
-  min-width: 970px;
-  max-width: 1200px;
-
-  top: 12.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-
-  border-radius: 0.75rem;
-
-  background-color: white;
-}
-
-.info-card .panel {
-  flex: 1;
-  position: relative;
-
-  display: flex;
-  flex-direction: column;
-
-  height: 100%;
-  width: 100%;
-
-  padding: 37px 4rem 37px 2rem;
-  text-align: left;
-}
-
-#title {
-  width: 100%;
-
-  color: var(--gray-light);
-  font-size: 10px;
-  font-weight: 700;
-
-  letter-spacing: 3px;
-}
-
-#info {
-  color: black;
-  margin-top: 20px;
-  font-weight: 500;
-
-  font-size: 1.5rem;
-}
-
-.panel::after {
-  content: "";
-
-  position: absolute;
-  top: 25%;
-  right: 0;
-  width: 1px;
-  height: 50%;
-  background-color: var(--gray-light);
-}
-
-.panel:last-child::after {
-  display: none;
-}
-
 /* #endregion */
 
 /* #region Leaflet map */
@@ -181,50 +114,19 @@ body {
     background-image: url(./assets/pattern-bg-mobile.png);
   }
 
-  .info-card {
-    flex-direction: column;
-    width: 77dvw;
-    min-width: 300px;
-    height: 18.75rem;
-    padding: 1rem;
-    top: 12.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-
-  }
-
-  .info-card .panel {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    height: 25%;
-    justify-content: center;
-    align-items: center;
-    padding:0;
-  }
-
-  #info {
-    margin-top: 0px;
-  }
-
   .hero {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  form{
+  form {
     width: 77dvw;
   }
-  
+
   .hero form input {
     flex: 1;
-    min-width: 100px
-  }
-
-  form button {
-    min-width: 57.6px;
-    min-height: 58px;
+    min-width: 100px;
   }
 
   .panel::after {

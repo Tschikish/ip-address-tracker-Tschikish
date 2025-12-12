@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
+import "./InfoCard.css"
 
 export interface InfoCardProps {
   ip: string;
   city: string;
   postalCode: string;
   regionCode: string;
-  UfcOffset: number;
+  UfcOffset: string;
   ISP: string;
 }
 
@@ -18,7 +19,7 @@ const placeholder = {
   city: "Brooklyn",
   postalCode: "10001",
   regionCode: "NY",
-  UfcOffset: -18000,
+  UfcOffset: "-05:00",
   ISP: "SpaceX Starlink",
 };
 
