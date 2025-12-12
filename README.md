@@ -30,7 +30,7 @@ The logic is there for it to load, but I've realized a bit late that the ip para
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![](./ProjectScreenshot.png)
 
 Hoping the formatting isn't ugly and follows the page flow.
 
